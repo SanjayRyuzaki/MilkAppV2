@@ -10,8 +10,8 @@ export default function HomeScreen() {
 
   const handleAdminLogin = () => {
     try {
-      // Bug: Incorrect route path causing navigation failure
-      router.push('/auth/admin-login-broken');
+      // Fixed: Correct route path for admin login
+      router.push('/auth/admin-login');
     } catch (error) {
       Alert.alert('Navigation Error', 'Failed to navigate to admin login');
     }
@@ -19,8 +19,8 @@ export default function HomeScreen() {
 
   const handleCustomerLogin = () => {
     try {
-      // Bug: Missing route causing navigation to fail
-      router.push('/auth/customer-login-missing');
+      // Fixed: Correct route path for customer login
+      router.push('/auth/customer-login');
     } catch (error) {
       Alert.alert('Navigation Error', 'Failed to navigate to customer login');
     }
