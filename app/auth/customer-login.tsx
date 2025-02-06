@@ -17,7 +17,8 @@ export default function CustomerLogin() {
     
     // Basic validation for demo
     if (phone === '1234567890' && password === 'customer123') {
-      router.replace('/(customer)/customer-home');
+      // Bug: Incorrect navigation route
+      router.replace('/(customer)/customer-dashboard-wrong');
     } else {
       Alert.alert('Login Failed', 'Invalid credentials');
     }
@@ -29,9 +30,9 @@ export default function CustomerLogin() {
       style={styles.container}
     >
       <View style={styles.header}>
-        <Ionicons name="people-circle" size={60} color="#10b981" />
+        <Ionicons name="people" size={60} color="#10b981" />
         <Text style={styles.title}>Customer Login</Text>
-        <Text style={styles.subtitle}>Track your milk deliveries</Text>
+        <Text style={styles.subtitle}>Access your milk delivery</Text>
       </View>
       
       <View style={styles.formContainer}>
