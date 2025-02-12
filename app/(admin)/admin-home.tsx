@@ -1,81 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function AdminHome() {
-  const router = useRouter();
-  // Bug: Removed loading state management
-  const [stats, setStats] = useState({
-    totalCustomers: 0,
-    todayDeliveries: 0,
-    totalRevenue: 0,
-  });
+  const [totalCustomers, setTotalCustomers] = useState(25);
+  const [todayDeliveries, setTodayDeliveries] = useState(18);
+  const [totalRevenue, setTotalRevenue] = useState(4500);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Simulate API call without proper loading state
+    // Simulate data loading
+    setIsLoading(true);
     setTimeout(() => {
-      setStats({
-        totalCustomers: 45,
-        todayDeliveries: 23,
-        totalRevenue: 12500,
-      });
-    }, 2000);
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
-  const handleDailyOrders = () => {
-    router.push('/(admin)/daily-orders');
-  };
-
-  const handlePayments = () => {
-    router.push('/(admin)/payments');
-  };
-
   const handleAddCustomer = () => {
-    Alert.alert('Add Customer', 'Feature coming soon!');
+    Alert.alert('Add Customer', 'Navigate to customer management screen');
   };
+
+  const handleViewOrders = () => {
+    Alert.alert('View Orders', 'Navigate to daily orders screen');
+  };
+
+  const handleViewPayments = () => {
+    Alert.alert('View Payments', 'Navigate to payment reports screen');
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Ionicons name="refresh" size={40} color="#4ade80" />
+        <Text style={styles.loadingText}>Loading dashboard...</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
+        <Ionicons name="analytics" size={30} color="#4ade80" />
         <Text style={styles.title}>Admin Dashboard</Text>
-        <Text style={styles.subtitle}>Welcome back, Admin!</Text>
       </View>
-
+      
       <View style={styles.statsContainer}>
         <View style={styles.statCard}>
           <Ionicons name="people" size={24} color="#4ade80" />
-          <Text style={styles.statNumber}>{stats.totalCustomers}</Text>
+          <Text style={styles.statNumber}>{totalCustomers}</Text>
           <Text style={styles.statLabel}>Total Customers</Text>
         </View>
-
+        
         <View style={styles.statCard}>
-          <Ionicons name="car" size={24} color="#4ade80" />
-          <Text style={styles.statNumber}>{stats.todayDeliveries}</Text>
+          <Ionicons name="checkmark-circle" size={24} color="#4ade80" />
+          <Text style={styles.statNumber}>{todayDeliveries}</Text>
           <Text style={styles.statLabel}>Today's Deliveries</Text>
         </View>
-
+        
         <View style={styles.statCard}>
           <Ionicons name="cash" size={24} color="#4ade80" />
-          <Text style={styles.statNumber}>₹{stats.totalRevenue}</Text>
+          <Text style={styles.statNumber}>₹{totalRevenue}</Text>
           <Text style={styles.statLabel}>Total Revenue</Text>
         </View>
       </View>
-
+      
       <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionButton} onPress={handleDailyOrders}>
-          <Ionicons name="list" size={24} color="#fff" />
-          <Text style={styles.actionText}>Daily Orders</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionButton} onPress={handlePayments}>
-          <Ionicons name="card" size={24} color="#fff" />
-          <Text style={styles.actionText}>Payments</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={styles.actionButton} onPress={handleAddCustomer}>
           <Ionicons name="person-add" size={24} color="#fff" />
-          <Text style={styles.actionText}>Add Customer</Text>
+          <Text style={styles.actionText}>Add New Customer</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.actionButton} onPress={handleViewOrders}>
+          <Ionicons name="list" size={24} color="#fff" />
+          <Text style={styles.actionText}>View Daily Orders</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.actionButton} onPress={handleViewPayments}>
+          <Ionicons name="card" size={24} color="#fff" />
+          <Text style={styles.actionText}>Payment Reports</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -85,66 +87,71 @@ export default function AdminHome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a',
+    backgroundColor: '#1c1c2b',
+    padding: 20,
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#1c1c2b',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 10,
   },
   header: {
-    padding: 20,
-    paddingTop: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 30,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#f1f5f9',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#94a3b8',
+    color: '#fff',
+    marginLeft: 10,
   },
   statsContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    gap: 15,
+    justifyContent: 'space-between',
     marginBottom: 30,
   },
   statCard: {
-    flex: 1,
-    backgroundColor: '#1e293b',
+    backgroundColor: '#2e2e3e',
     padding: 20,
     borderRadius: 12,
+    flex: 1,
+    marginHorizontal: 5,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#334155',
   },
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#f1f5f9',
+    color: '#4ade80',
     marginTop: 8,
-    marginBottom: 4,
+    marginBottom: 5,
   },
   statLabel: {
     fontSize: 12,
-    color: '#94a3b8',
+    color: '#aaa',
     textAlign: 'center',
   },
   actionsContainer: {
-    paddingHorizontal: 20,
     gap: 15,
   },
   actionButton: {
     backgroundColor: '#4ade80',
-    padding: 20,
+    padding: 15,
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#4ade80',
+    justifyContent: 'center',
   },
   actionText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
-    marginLeft: 12,
+    marginLeft: 10,
   },
 });

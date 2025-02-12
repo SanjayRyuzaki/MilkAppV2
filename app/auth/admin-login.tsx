@@ -10,7 +10,12 @@ export default function AdminLogin() {
   const router = useRouter();
 
   const handleLogin = async () => {
-    // Bug: No validation - allows empty fields and invalid email
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill all fields');
+      return;
+    }
+    
+    // Basic validation for demo
     if (email === 'admin@milkapp.com' && password === 'admin123') {
       router.replace('/(admin)/admin-home');
     } else {
