@@ -1,27 +1,17 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function AdminTabs() {
+export default function AdminLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: '#1c1c2b',
-          borderTopColor: '#2e2e3e',
+          borderTopColor: '#334155',
         },
         tabBarActiveTintColor: '#4ade80',
-        tabBarInactiveTintColor: '#aaa',
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: '600',
-        },
-        headerStyle: {
-          backgroundColor: '#1c1c2b',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+        tabBarInactiveTintColor: '#94a3b8',
       }}
     >
       <Tabs.Screen
@@ -29,7 +19,7 @@ export default function AdminTabs() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" color={color} size={size} />
+            <Ionicons name="home" size={size} color={color} />
           ),
         }}
       />
@@ -38,7 +28,7 @@ export default function AdminTabs() {
         options={{
           title: 'Orders',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
+            <Ionicons name="list" size={size} color={color} />
           ),
         }}
       />
@@ -47,7 +37,7 @@ export default function AdminTabs() {
         options={{
           title: 'Payments',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cash" color={color} size={size} />
+            <Ionicons name="card" size={size} color={color} />
           ),
         }}
       />

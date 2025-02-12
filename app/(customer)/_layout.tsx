@@ -1,23 +1,17 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function CustomerTabs() {
+export default function CustomerLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#111827',
-          borderTopWidth: 0,
+          backgroundColor: '#0f172a',
+          borderTopColor: '#334155',
         },
         tabBarActiveTintColor: '#10b981',
-        tabBarInactiveTintColor: '#9ca3af',
-        headerStyle: {
-          backgroundColor: '#1f2937',
-        },
-        headerTitleStyle: {
-          color: '#facc15',
-          fontWeight: 'bold',
-        },
+        tabBarInactiveTintColor: '#94a3b8',
       }}
     >
       <Tabs.Screen
@@ -25,7 +19,7 @@ export default function CustomerTabs() {
         options={{
           title: 'My Milk',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="water-outline" size={size} color={color} />
+            <Ionicons name="water" size={size} color={color} />
           ),
         }}
       />
@@ -34,7 +28,7 @@ export default function CustomerTabs() {
         options={{
           title: 'My Payments',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cash-outline" size={size} color={color} />
+            <Ionicons name="card" size={size} color={color} />
           ),
         }}
       />

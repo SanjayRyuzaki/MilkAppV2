@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -7,24 +7,6 @@ const { width } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const router = useRouter();
-
-  const handleAdminLogin = () => {
-    try {
-      // Fixed: Correct route path for admin login
-      router.push('/auth/admin-login');
-    } catch (error) {
-      Alert.alert('Navigation Error', 'Failed to navigate to admin login');
-    }
-  };
-
-  const handleCustomerLogin = () => {
-    try {
-      // Fixed: Correct route path for customer login
-      router.push('/auth/customer-login');
-    } catch (error) {
-      Alert.alert('Navigation Error', 'Failed to navigate to customer login');
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +19,7 @@ export default function HomeScreen() {
       <View style={styles.buttonContainer}>
         <TouchableOpacity 
           style={styles.button}
-          onPress={handleAdminLogin}
+          onPress={() => router.push('/auth/admin-login')}
         >
           <Ionicons name="person" size={24} color="#fff" />
           <Text style={styles.buttonText}>Admin Login</Text>
@@ -45,7 +27,7 @@ export default function HomeScreen() {
         
         <TouchableOpacity 
           style={[styles.button, styles.customerButton]}
-          onPress={handleCustomerLogin}
+          onPress={() => router.push('/auth/customer-login')}
         >
           <Ionicons name="people" size={24} color="#fff" />
           <Text style={styles.buttonText}>Customer Login</Text>

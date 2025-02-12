@@ -17,7 +17,6 @@ export default function CustomerLogin() {
     
     // Basic validation for demo
     if (phone === '1234567890' && password === 'customer123') {
-      // Fixed: Correct navigation route
       router.replace('/(customer)/customer-home');
     } else {
       Alert.alert('Login Failed', 'Invalid credentials');
